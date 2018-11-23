@@ -113,13 +113,17 @@
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
     application.applicationIconBadgeNumber = 0;
-    NSString *msg = [NSString stringWithFormat:@"%@", userInfo];
-    NSLog(@"%@",msg);
+    NSLog(@"%@", userInfo);
+    NSString *msg =  [[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
     [self createAlert:msg];
 }
 
 - (void)createAlert:(NSString *)msg {
+    
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Message Received" message:[NSString stringWithFormat:@"%@", msg]delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    
+    NSLog(@"%@",msg);
+    
     [alertView show];
 }
 
